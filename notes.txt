@@ -1,0 +1,17 @@
+// REQUIREMENTS
+
+// We need to create a custom LWC component that allows the user to select working hours for each day of the week, similar to the "Google Working Hours" functionality. 
+// The component will allow enabling/disabling days, selecting start and end times and will include validations: at least one active day must be set, ranges must be valid ("From" < "To"), and incomplete data cannot be saved.
+// The user can either save the valid configuration or close the component without saving 
+// — exiting in any other way should not be allowed.
+
+// Upon saving, the component will record the information in a custom data model:
+// - Working_Schedule__c (parent) — related to the current user who just used the component, containing general details such as timezone, status etc (of your choice).
+// - Working_Day__c (child) — each record representing a day of the week, with fields: day, start time, end time and active/inactive.
+
+// The component must be able to create a new program, subsequent editing is done directly from the platform.
+
+// Build the component and everything related to it according to best practice.
+// Don't forget about the test class with coverage >80%.
+
+// STEPS
