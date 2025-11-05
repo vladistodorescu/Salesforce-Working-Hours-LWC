@@ -1,4 +1,4 @@
-// REQUIREMENTS
+REQUIREMENTS
 
 // We need to create a custom LWC component that allows the user to select working hours for each day of the week, similar to the "Google Working Hours" functionality. 
 // The component will allow enabling/disabling days, selecting start and end times and will include validations: at least one active day must be set, ranges must be valid ("From" < "To"), and incomplete data cannot be saved.
@@ -14,4 +14,17 @@
 // Build the component and everything related to it according to best practice.
 // Don't forget about the test class with coverage >80%.
 
-// STEPS
+STEPS
+
+// First we create a Global Value Set for the possible hour options
+
+// Then we create the custom object Working_Schedule__c with the following fields:
+//   - Active__c --> checkbox, set as active when record is created, and should be set to inactive when a new record has been created and assigned to the same user (visible, read-only)
+//   - User_Lookup__c --> lookup relationship to User (which current User has this working schedule) (visible, read-only)
+//   - Timezone__c --> a picklist for defining the Timezone in which the Working Schedule functions, with values from the Global Value Set "Timezones" (visible, read-only)
+
+// Lastly, we create the custom object Working_Day__c with the following fields:
+//   - Day_In_The_Week__c --> a picklist for defining which day of the week the program is for, with values from the Global Value Set "Day In The Week" (visible, read-only)
+//   - Start_Hour__c --> a picklist for choosing the start hour of the working program from the day, with values from the Global Value Set "Hours in the Day" (visible, editable)
+//   - End_Hour__c --> a picklist for choosing the end hour of the working program from the day, with values from the Global Value Set "Hours in the Day" (visible, editable)
+//   
