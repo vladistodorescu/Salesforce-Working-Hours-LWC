@@ -30,6 +30,10 @@ IMPLEMENTATION
 //   - Active__c --> checkbox, set as active when record is created, and should be set to inactive when the master has been set to inactive (visible, read-only)
 //   - Working_Schedule__c --> master-detail realtionship, where Working_Day__c is the detail, so we know to what weekly schedule the daily schedule belongs (visibile)
 
-// Now that we have created the data model, we can start constructing the workingHours LWC:
-//   - 
+// Now that we have created the data model, we can start constructing the workingHours LWC.
+
+// 1st Screen --> Welcome Screen
+//   - here we explain to the user the LWC's functionality and allow him to start the process
+
+// 2nd Screen --> Actual Scheduler
 
