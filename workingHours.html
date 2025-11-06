@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title = "Salesforce Working Hours">
+        <template if:true={showWelcomeScreen}>
+            <div class="slds-p-around_medium slds-text-longform slds-text-body_regular narrow">
+                <p>Welcome to the Salesforce Working Hours functionality.</p>
+                <p>It lets you register your working schedule so your co-workers know when to contact you.</p>
+            </div>
+            <div slot="footer" class="slds-p-around_small slds-text-align_right">
+                <lightning-button variant="brand" label="Set Up Schedule" onclick={showDetails}></lightning-button>
+            </div>
+        </template>    
+    </lightning-card>
+</template>
