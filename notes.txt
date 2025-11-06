@@ -14,7 +14,7 @@ REQUIREMENTS
 // Build the component and everything related to it according to best practice.
 // Don't forget about the test class with coverage >80%.
 
-STEPS
+IMPLEMENTATION
 
 // First we create a Global Value Set for the possible hour options
 
@@ -27,4 +27,9 @@ STEPS
 //   - Day_In_The_Week__c --> a picklist for defining which day of the week the program is for, with values from the Global Value Set "Day In The Week" (visible, read-only)
 //   - Start_Hour__c --> a picklist for choosing the start hour of the working program from the day, with values from the Global Value Set "Hours in the Day" (visible, editable)
 //   - End_Hour__c --> a picklist for choosing the end hour of the working program from the day, with values from the Global Value Set "Hours in the Day" (visible, editable)
-//   
+//   - Active__c --> checkbox, set as active when record is created, and should be set to inactive when the master has been set to inactive (visible, read-only)
+//   - Working_Schedule__c --> master-detail realtionship, where Working_Day__c is the detail, so we know to what weekly schedule the daily schedule belongs (visibile)
+
+// Now that we have created the data model, we can start constructing the workingHours LWC:
+//   - 
+
