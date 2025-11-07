@@ -1,13 +1,119 @@
 <template>
-    <lightning-card title = "Salesforce Working Hours">
-        <template if:true={showWelcomeScreen}>
+    <!-- Welcome Screen -->
+    <template if:true={showWelcomeScreenBool}>
+        <lightning-card title="Salesforce Working Hours">
+            <!-- Welcome Text -->
             <div class="slds-p-around_medium slds-text-longform slds-text-body_regular narrow">
-                <p>Welcome to the Salesforce Working Hours functionality.</p>
-                <p>It lets you register your working schedule so your co-workers know when to contact you.</p>
+                Welcome to the Salesforce Working Hours functionality.<br>
+                It lets you register your working schedule so your co-workers know when to contact you.
             </div>
+
             <div slot="footer" class="slds-p-around_small slds-text-align_right">
-                <lightning-button variant="brand" label="Set Up Schedule" onclick={showDetails}></lightning-button>
+                <lightning-button variant="brand" label="Set Up Schedule" onclick={showScheduler}></lightning-button>
             </div>
-        </template>    
-    </lightning-card>
+        </lightning-card>
+    </template>
+
+    <!-- Scheduler -->
+    <template if:true={showSchedulerBool}>
+        <lightning-card title="Set Up Your Schedule">
+            <!-- Scheduler Instructions -->
+            <div class="slds-p-around_medium slds-text-longform slds-text-body_regular narrow">
+                Welcome to the Salesforce Working Hours functionality.<br>
+                It lets you register your working schedule so your co-workers know when to contact you.
+            </div>
+
+            <!-- Monday Comboboxes -->
+            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_small">
+                <div class="slds-col slds-size_1-of-5 slds-text-title_bold">Monday</div>
+            </div>
+            <div class="slds-col slds-size_4-of-5">
+                <div class="time-chip">
+                  <lightning-combobox class="w8" variant="label-hidden" placeholder="Start"
+                                      value={mondayStart} options={hourOptions}
+                                      onchange={handleMondayStartChange}>
+                  </lightning-combobox>
+                  <span class="sep">to</span>
+                  <lightning-combobox class="w8" variant="label-hidden" placeholder="End"
+                                      value={mondayEnd} options={hourOptions}
+                                      onchange={handleMondayEndChange}>
+                  </lightning-combobox>
+                </div>
+            </div>
+
+            <!-- Tuesday Comboboxes -->
+            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_small">
+                <div class="slds-col slds-size_1-of-5 slds-text-title_bold">Tuesday</div>
+            </div>
+            <div class="slds-col slds-size_4-of-5">
+                <div class="time-chip">
+                  <lightning-combobox class="w8" variant="label-hidden" placeholder="Start"
+                                      value={tuesdayStart} options={hourOptions}
+                                      onchange={handleTuesdayStartChange}>
+                  </lightning-combobox>
+                  <span class="sep">to</span>
+                  <lightning-combobox class="w8" variant="label-hidden" placeholder="End"
+                                      value={tuesdayEnd} options={hourOptions}
+                                      onchange={handleTuesdayEndChange}>
+                  </lightning-combobox>
+                </div>
+            </div>
+
+            <!-- Wednesday Comboboxes -->
+            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_small">
+                <div class="slds-col slds-size_1-of-5 slds-text-title_bold">Wednesday</div>
+            </div>
+            <div class="slds-col slds-size_4-of-5">
+                <div class="time-chip">
+                  <lightning-combobox class="w8" variant="label-hidden" placeholder="Start"
+                                      value={wednesdayStart} options={hourOptions}
+                                      onchange={handleWednesdayStartChange}>
+                  </lightning-combobox>
+                  <span class="sep">to</span>
+                  <lightning-combobox class="w8" variant="label-hidden" placeholder="End"
+                                      value={wednesdayEnd} options={hourOptions}
+                                      onchange={handleWednesddayEndChange}>
+                  </lightning-combobox>
+                </div>
+            </div>
+
+            <!-- Thursday Comboboxes -->
+            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_small">
+                <div class="slds-col slds-size_1-of-5 slds-text-title_bold">Thursday</div>
+            </div>
+            <div class="slds-col slds-size_4-of-5">
+                <div class="time-chip">
+                  <lightning-combobox class="w8" variant="label-hidden" placeholder="Start"
+                                      value={thursdayStart} options={hourOptions}
+                                      onchange={handleThursdayStartChange}>
+                  </lightning-combobox>
+                  <span class="sep">to</span>
+                  <lightning-combobox class="w8" variant="label-hidden" placeholder="End"
+                                      value={thursdayEnd} options={hourOptions}
+                                      onchange={handleThursdayEndChange}>
+                  </lightning-combobox>
+                </div>
+            </div>
+
+            <!-- Friday Comboboxes -->
+            <div class="slds-grid slds-grid_vertical-align-center slds-p-around_small">
+                <div class="slds-col slds-size_1-of-5 slds-text-title_bold">Friday</div>
+            </div>
+            <div class="slds-col slds-size_4-of-5">
+                <div class="time-chip">
+                  <lightning-combobox class="w8" variant="label-hidden" placeholder="Start"
+                                      value={fridayStart} options={hourOptions}
+                                      onchange={handleFridayStartChange}>
+                  </lightning-combobox>
+                  <span class="sep">to</span>
+                  <lightning-combobox class="w8" variant="label-hidden" placeholder="End"
+                                      value={thursdayEnd} options={hourOptions}
+                                      onchange={handleFridayEndChange}>
+                  </lightning-combobox>
+                </div>
+            </div>
+
+            <div slot="footer" class="slds-p-around_small slds-text-align_right"></div>
+        </lightning-card>
+    </template>
 </template>
