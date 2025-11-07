@@ -12,17 +12,39 @@ export default class WorkingHours extends LightningElement {
     showSchedulerBool = false;
 
     recordTypeId;
+
     // remember to later verify later before saving, that the start time is before the end time
-    mondayStart = null;
-    mondayEnd = null;
-    tuesdayStart = null;
-    tuesdayEnd = null;
-    wednesdayStart = null;
-    wednesdayEnd = null;
-    thursdayStart = null;
-    thursdayEnd = null;
-    fridayStart = null;
-    fridayEnd = null;
+    mondayStartFirstInterval = null;
+    mondayEndFirstInterval = null;
+    mondayStartSecondInterval = null;
+    mondayEndSecondInterval = null;
+
+    tuesdayStartFirstInterval = null;
+    tuesdayEndFirstInterval = null;
+    tuesdayStartSecondInterval = null;
+    tuesdayEndSecondInterval = null;
+
+    wednesdayStartFirstInterval = null;
+    wednesdayEndFirstInterval = null;
+    wednesdayStartSecondInterval = null;
+    wednesdayEndSecondInterval = null;
+
+    thursdayStartFirstInterval = null;
+    thursdayEndFirstInterval = null;
+    thursdayStartSecondInterval = null;
+    thursdayEndSecondInterval = null;
+
+    fridayStartFirstInterval = null;
+    fridayEndFirstInterval = null;
+    fridayStartSecondInterval = null;
+    fridayEndSecondInterval = null;
+
+    // extra Comboboxes Booleans
+    mondayExtraCombobox = false;
+    tuesdayExtraCombobox = false;
+    wednesdayExtraCombobox = false;
+    thursdayExtraCombobox = false;
+    fridayExtraCombobox = false;
 
 
     hoursPicklistOptions = [];
@@ -71,44 +93,150 @@ export default class WorkingHours extends LightningElement {
         return opts;   
     }
 
-    handleMondayStartChange(event) {
-        this.mondayStart = event.detail.value;
+    // Handlers for First Interval
+
+    handleMondayStartFirstIntervalChange(event) {
+        this.mondayStartFirstInterval = event.detail.value;
     }
 
-    handleMondayEndChange(event){
-        this.mondayEnd = event.detail.value;
+    handleMondayEndFirstIntervalChange(event){
+        this.mondayEndFirstInterval = event.detail.value;
     }
 
-    handleTuesdayStartChange(event) {
-        this.tuesdayStart = event.detail.value;
+    handleTuesdayStartFirstIntervalChange(event) {
+        this.tuesdayStartFirstInterval = event.detail.value;
     }
 
-    handleTuesdayEndChange(event){
-        this.tuesdayEnd = event.detail.value;
+    handleTuesdayEndFirstIntervalChange(event){
+        this.tuesdayEndFirstInterval = event.detail.value;
+    } 
+
+    handleWednesdayStartFirstIntervalChange(event){
+        this.wednesdayStartFirstInterval = event.detail.value;
     }
 
-    handleWednesdayStartChange(event){
-        this.wednesdayStart = event.detail.value;
+    handleWednesdayEndFirstIntervalChange(event){
+        this.wednesdayEndFirstInterval = event.detail.value;
     }
 
-    handleWednesdayEndChange(event){
-        this.wednesdayEnd = event.detail.value;
+    handleThursdayStartFirstIntervalChange(event){
+        this.thursdayStartFirstInterval = event.detail.value;
     }
 
-    handleThursdayStartChange(event){
-        this.thursdayStart = event.detail.value;
+    handleThursdayEndFirstIntervalChange(event){
+        this.thursdayEndFirstInterval = event.detail.value;
     }
 
-    handleThursdayEndChange(event){
-        this.thursdayEnd = event.detail.value;
+    handleFridayStartFirstIntervalChange(event){
+        this.fridayStartFirstInterval = event.detail.value;
     }
 
-    handleFridayStartChange(event){
-        this.fridayStart = event.detail.value;
+    handleFridayEndFirstIntervalChange(event){
+        this.fridayEndFirstInterval = event.detail.value;
     }
 
-    handleFridayEndChange(event){
-        this.fridayEnd = event.detail.value;
+    // Handlers for Second Interval
+
+    handleMondayStartSecondIntervalChange(event) {
+        this.mondayStartSecondInterval = event.detail.value;
+    }
+
+    handleMondayEndSecondIntervalChange(event){
+        this.mondayEndSecondInterval = event.detail.value;
+    }
+
+    handleTuesdayStartSecondIntervalChange(event) {
+        this.tuesdayStartSecondInterval = event.detail.value;
+    }
+
+    handleTuesdayEndSecondIntervalChange(event){
+        this.tuesdayEndSecondInterval = event.detail.value;
+    } 
+
+    handleWednesdayStartSecondIntervalChange(event){
+        this.wednesdayStartSecondInterval = event.detail.value;
+    }
+
+    handleWednesdayEndSecondIntervalChange(event){
+        this.wednesdayEndSecondInterval = event.detail.value;
+    }
+
+    handleThursdayStartSecondIntervalChange(event){
+        this.thursdayStartSecondInterval = event.detail.value;
+    }
+
+    handleThursdayEndSecondIntervalChange(event){
+        this.thursdayEndSecondInterval = event.detail.value;
+    }
+
+    handleFridayStartSecondIntervalChange(event){
+        this.fridayStartSecondInterval = event.detail.value;
+    }
+
+    handleFridayEndSecondIntervalChange(event){
+        this.fridayEndSecondInterval = event.detail.value;
+    }
+
+    saveSchedule(){}
+
+    exitLWC(){
+        this.showSchedulerBool = false;
+        this.showWelcomeScreenBool = true;
+
+        this.mondayStart = null;
+        this.mondayEnd = null;
+        this.tuesdayStart = null;
+        this.tuesdayEnd = null;
+        this.wednesdayStart = null;
+        this.wednesdayEnd = null;
+        this.thursdayStart = null;
+        this.thursdayEnd = null;
+        this.fridayStart = null;
+        this.fridayEnd = null;
+    }
+
+    addExtraCombobox(){
+
+    }
+
+    addMondayExtraCombobox(){
+        this.mondayExtraCombobox = true;
+    }
+
+    addTuesdayExtraCombobox(){
+        this.tuesdayExtraCombobox = true;
+    }
+
+    addWednesdayExtraCombobox(){
+        this.wednesdayExtraCombobox = true;
+    }
+
+    addThursdayExtraCombobox(){
+        this.thursdayExtraCombobox = true;
+    }
+    
+    addFridayExtraCombobox(){
+        this.fridayExtraCombobox = true;
+    }
+
+    removeMondayExtraCombobox(){
+        this.mondayExtraCombobox = false;
+    }
+
+    removeTuesdayExtraCombobox(){
+        this.tuesdayExtraCombobox = false;
+    }
+
+    removeWednesdayExtraCombobox(){
+        this.wednesdayExtraCombobox = false;
+    }
+
+    removeThursdayExtraCombobox(){
+        this.thursdayExtraCombobox = false;
+    }
+    
+    removeFridayExtraCombobox(){
+        this.fridayExtraCombobox = false;
     }
 
 }
