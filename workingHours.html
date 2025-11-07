@@ -19,101 +19,368 @@
         <lightning-card title="Set Up Your Schedule">
             <!-- Scheduler Instructions -->
             <div class="slds-p-around_medium slds-text-longform slds-text-body_regular narrow">
-                Welcome to the Salesforce Working Hours functionality.<br>
-                It lets you register your working schedule so your co-workers know when to contact you.
+                Please select the time intervals, for each working day of the week, in which you are available for your colleagues:<br>
             </div>
 
             <!-- Monday Comboboxes -->
             <div class="slds-grid slds-grid_vertical-align-center slds-p-around_small">
                 <div class="slds-col slds-size_1-of-5 slds-text-title_bold">Monday</div>
             </div>
-            <div class="slds-col slds-size_4-of-5">
-                <div class="time-chip">
-                  <lightning-combobox class="w8" variant="label-hidden" placeholder="Start"
-                                      value={mondayStart} options={hourOptions}
-                                      onchange={handleMondayStartChange}>
-                  </lightning-combobox>
-                  <span class="sep">to</span>
-                  <lightning-combobox class="w8" variant="label-hidden" placeholder="End"
-                                      value={mondayEnd} options={hourOptions}
-                                      onchange={handleMondayEndChange}>
-                  </lightning-combobox>
+            <!-- Row: Chip and Plus Button -->
+            <div class="slds-grid slds-grid_vertical-align-center slds-gutters_none slds-p-around_small">
+                <!-- Time Chip -->
+                <div class="slds-col slds-grow-none">
+                    <div class="time-chip">
+                        <lightning-combobox class="w8" variant="label-hidden" placeholder="Start"
+                                            value={mondayStartFirstInterval} options={hourOptions}
+                                            onchange={handleMondayStartFirstIntervalChange}>
+                        </lightning-combobox>
+                        <span class="sep">to</span>
+                        <lightning-combobox class="w8" variant="label-hidden" placeholder="End"
+                                            value={mondayEndFirstInterval} options={hourOptions}
+                                            onchange={handleMondayEndFirstIntervalChange}>
+                        </lightning-combobox>
+                    </div>
                 </div>
+  
+                <!-- Plus Button -->
+                <template if:false={mondayExtraCombobox}>
+                    <div class="slds-col slds-grow-none slds-m-left_x-small">
+                        <lightning-button-icon
+                            icon-name="utility:add"
+                            alternative-text="Add Monday time range"
+                            title="Add Monday time range"
+                            variant="border"
+                            size="small"
+                            class="slds-button_icon-border-circle slds-m-left_small"
+                            onclick={addMondayExtraCombobox}>
+                        </lightning-button-icon>
+                    </div>
+                </template>
             </div>
+
+            <!-- If extra Combobox needed for Monday -->
+            <template if:true={mondayExtraCombobox}>
+                <!-- Row: Chip and Minus = Button -->
+                <div class="slds-grid slds-grid_vertical-align-center slds-gutters_none slds-p-around_small">
+                    <!-- Time Chip -->
+                    <div class="slds-col slds-grow-none">
+                        <div class="time-chip">
+                            <lightning-combobox class="w8" variant="label-hidden" placeholder="Start"
+                                                value={mondayStartSecondInterval} options={hourOptions}
+                                                onchange={handleMondayStartSecondIntervalChange}>
+                            </lightning-combobox>
+                            <span class="sep">to</span>
+                            <lightning-combobox class="w8" variant="label-hidden" placeholder="End"
+                                                value={mondayEndSecondInterval} options={hourOptions}
+                                                onchange={handleMondayEndSecondIntervalChange}>
+                            </lightning-combobox>
+                        </div>
+                    </div>
+
+                    <!-- Minus Button -->
+                    <div class="slds-col slds-grow-none slds-m-left_x-small">
+                        <lightning-button-icon
+                            icon-name="utility:dash"
+                            alternative-text="Remove Monday time range"
+                            title="Remove Monday time range"
+                            variant="border"
+                            size="small"
+                            class="slds-button_icon-border-circle slds-m-left_small"
+                            onclick={removeMondayExtraCombobox}>
+                        </lightning-button-icon>
+                    </div>
+                </div>
+            </template>
 
             <!-- Tuesday Comboboxes -->
             <div class="slds-grid slds-grid_vertical-align-center slds-p-around_small">
                 <div class="slds-col slds-size_1-of-5 slds-text-title_bold">Tuesday</div>
             </div>
-            <div class="slds-col slds-size_4-of-5">
-                <div class="time-chip">
-                  <lightning-combobox class="w8" variant="label-hidden" placeholder="Start"
-                                      value={tuesdayStart} options={hourOptions}
-                                      onchange={handleTuesdayStartChange}>
-                  </lightning-combobox>
-                  <span class="sep">to</span>
-                  <lightning-combobox class="w8" variant="label-hidden" placeholder="End"
-                                      value={tuesdayEnd} options={hourOptions}
-                                      onchange={handleTuesdayEndChange}>
-                  </lightning-combobox>
+            <!-- Row: Chip and Plus Button -->
+            <div class="slds-grid slds-grid_vertical-align-center slds-gutters_none slds-p-around_small">
+                <!-- Time Chip -->
+                <div class="slds-col slds-grow-none">
+                    <div class="time-chip">
+                        <lightning-combobox class="w8" variant="label-hidden" placeholder="Start"
+                                            value={tuesdayStartFirstInterval} options={hourOptions}
+                                            onchange={handleTuesdayStartFirstIntervalChange}>
+                        </lightning-combobox>
+                        <span class="sep">to</span>
+                        <lightning-combobox class="w8" variant="label-hidden" placeholder="End"
+                                            value={tuesdayEndFirstInterval} options={hourOptions}
+                                            onchange={handleTuesdayEndFirstIntervalChange}>
+                        </lightning-combobox>
+                    </div>
                 </div>
+
+                <!-- Plus Button -->
+                <template if:false={tuesdayExtraCombobox}>
+                    <div class="slds-col slds-grow-none slds-m-left_x-small">
+                        <lightning-button-icon
+                            icon-name="utility:add"
+                            alternative-text="Add Tuesday time range"
+                            title="Add Tuesday time range"
+                            variant="border"
+                            size="small"
+                            class="slds-button_icon-border-circle slds-m-left_small"
+                            onclick={addTuesdayExtraCombobox}>
+                        </lightning-button-icon>
+                    </div>
+                </template>
             </div>
+
+            <!-- If extra Combobox needed for Tuesday-->
+            <template if:true={tuesdayExtraCombobox}>
+                <!-- Row: Chip and Minus = Button -->
+                <div class="slds-grid slds-grid_vertical-align-center slds-gutters_none slds-p-around_small">
+                    <!-- Time Chip -->
+                    <div class="slds-col slds-grow-none">
+                        <div class="time-chip">
+                            <lightning-combobox class="w8" variant="label-hidden" placeholder="Start"
+                                                value={tuesdayStartSecondInterval} options={hourOptions}
+                                                onchange={handleTuesdayStartSecondIntervalChange}>
+                            </lightning-combobox>
+                            <span class="sep">to</span>
+                            <lightning-combobox class="w8" variant="label-hidden" placeholder="End"
+                                                value={tuesdayEndSecondInterval} options={hourOptions}
+                                                onchange={handleTuesdayEndSecondIntervalChange}>
+                            </lightning-combobox>
+                        </div>
+                    </div>
+
+                    <!-- Minus Button -->
+                    <div class="slds-col slds-grow-none slds-m-left_x-small">
+                        <lightning-button-icon
+                            icon-name="utility:dash"
+                            alternative-text="Remove Tuesday time range"
+                            title="Remove Tuesday time range"
+                            variant="border"
+                            size="small"
+                            class="slds-button_icon-border-circle slds-m-left_small"
+                            onclick={removeTuesdayExtraCombobox}>
+                        </lightning-button-icon>
+                    </div>
+                </div>
+            </template>
 
             <!-- Wednesday Comboboxes -->
             <div class="slds-grid slds-grid_vertical-align-center slds-p-around_small">
                 <div class="slds-col slds-size_1-of-5 slds-text-title_bold">Wednesday</div>
             </div>
-            <div class="slds-col slds-size_4-of-5">
-                <div class="time-chip">
-                  <lightning-combobox class="w8" variant="label-hidden" placeholder="Start"
-                                      value={wednesdayStart} options={hourOptions}
-                                      onchange={handleWednesdayStartChange}>
-                  </lightning-combobox>
-                  <span class="sep">to</span>
-                  <lightning-combobox class="w8" variant="label-hidden" placeholder="End"
-                                      value={wednesdayEnd} options={hourOptions}
-                                      onchange={handleWednesddayEndChange}>
-                  </lightning-combobox>
+            <!-- Row: Chip and Plus Button -->
+            <div class="slds-grid slds-grid_vertical-align-center slds-gutters_none slds-p-around_small">
+                <!-- Time Chip -->
+                <div class="slds-col slds-grow-none">
+                    <div class="time-chip">
+                        <lightning-combobox class="w8" variant="label-hidden" placeholder="Start"
+                                            value={wednesdayStartFirstInterval} options={hourOptions}
+                                            onchange={handleWednesdayStartFirstIntervalChange}>
+                        </lightning-combobox>
+                        <span class="sep">to</span>
+                        <lightning-combobox class="w8" variant="label-hidden" placeholder="End"
+                                            value={wednesdayEndFirstinterval} options={hourOptions}
+                                            onchange={handleWednesddayEndFirstIntervalChange}>
+                        </lightning-combobox>
+                    </div>
                 </div>
+
+                <!-- Plus Button -->
+                <template if:false={wednesdayExtraCombobox}>
+                    <div class="slds-col slds-grow-none slds-m-left_x-small">
+                        <lightning-button-icon
+                            icon-name="utility:add"
+                            alternative-text="Add Wednesday time range"
+                            title="Add Wednesday time range"
+                            variant="border"
+                            size="small"
+                            class="slds-button_icon-border-circle slds-m-left_small"
+                            onclick={addWednesdayExtraCombobox}>
+                        </lightning-button-icon>
+                    </div>
+                </template>
             </div>
+
+            <!-- If extra Combobox needed for Wednesday-->
+            <template if:true={wednesdayExtraCombobox}>
+                <!-- Row: Chip and Minus = Button -->
+                <div class="slds-grid slds-grid_vertical-align-center slds-gutters_none slds-p-around_small">
+                    <!-- Time Chip -->
+                    <div class="slds-col slds-grow-none">
+                        <div class="time-chip">
+                            <lightning-combobox class="w8" variant="label-hidden" placeholder="Start"
+                                                value={wednesdayStartSecondInterval} options={hourOptions}
+                                                onchange={handleWednesdayStartSecondIntervalChange}>
+                            </lightning-combobox>
+                            <span class="sep">to</span>
+                            <lightning-combobox class="w8" variant="label-hidden" placeholder="End"
+                                                value={wednesdayEndSecondInterval} options={hourOptions}
+                                                onchange={handleWednesdayEndSecondIntervalChange}>
+                            </lightning-combobox>
+                        </div>
+                    </div>
+
+                    <!-- Minus Button -->
+                    <div class="slds-col slds-grow-none slds-m-left_x-small">
+                        <lightning-button-icon
+                            icon-name="utility:dash"
+                            alternative-text="Remove Wednesday time range"
+                            title="Remove Wednesday time range"
+                            variant="border"
+                            size="small"
+                            class="slds-button_icon-border-circle slds-m-left_small"
+                            onclick={removeWednesdayExtraCombobox}>
+                        </lightning-button-icon>
+                    </div>
+                </div>
+            </template>
 
             <!-- Thursday Comboboxes -->
             <div class="slds-grid slds-grid_vertical-align-center slds-p-around_small">
                 <div class="slds-col slds-size_1-of-5 slds-text-title_bold">Thursday</div>
             </div>
-            <div class="slds-col slds-size_4-of-5">
-                <div class="time-chip">
-                  <lightning-combobox class="w8" variant="label-hidden" placeholder="Start"
-                                      value={thursdayStart} options={hourOptions}
-                                      onchange={handleThursdayStartChange}>
-                  </lightning-combobox>
-                  <span class="sep">to</span>
-                  <lightning-combobox class="w8" variant="label-hidden" placeholder="End"
-                                      value={thursdayEnd} options={hourOptions}
-                                      onchange={handleThursdayEndChange}>
-                  </lightning-combobox>
+            <!-- Row: Chip and Plus Button -->
+            <div class="slds-grid slds-grid_vertical-align-center slds-gutters_none slds-p-around_small">
+                <!-- Time Chip -->
+                <div class="slds-col slds-grow-none">
+                    <div class="time-chip">
+                        <lightning-combobox class="w8" variant="label-hidden" placeholder="Start"
+                                            value={thursdayStartFirstInterval} options={hourOptions}
+                                            onchange={handleThursdayStartFirstIntervalChange}>
+                        </lightning-combobox>
+                        <span class="sep">to</span>
+                        <lightning-combobox class="w8" variant="label-hidden" placeholder="End"
+                                            value={thursdayEndFirstInterval} options={hourOptions}
+                                            onchange={handleThursdayEndFirstIntervalChange}>
+                        </lightning-combobox>
+                    </div>
                 </div>
+
+                <!-- Plus Button -->
+                <template if:false={thursdayExtraCombobox}>
+                    <div class="slds-col slds-grow-none slds-m-left_x-small">
+                        <lightning-button-icon
+                            icon-name="utility:add"
+                            alternative-text="Add Thursday time range"
+                            title="Add Thursday time range"
+                            variant="border"
+                            size="small"
+                            class="slds-button_icon-border-circle slds-m-left_small"
+                            onclick={addThursdayExtraCombobox}>
+                        </lightning-button-icon>
+                    </div>
+                </template>
             </div>
+
+            <!-- If extra Combobox needed for Thursday-->
+            <template if:true={thursdayExtraCombobox}>
+                <!-- Row: Chip and Minus = Button -->
+                <div class="slds-grid slds-grid_vertical-align-center slds-gutters_none slds-p-around_small">
+                    <!-- Time Chip -->
+                    <div class="slds-col slds-grow-none">
+                        <div class="time-chip">
+                            <lightning-combobox class="w8" variant="label-hidden" placeholder="Start"
+                                                value={thursdayStartSecondInterval} options={hourOptions}
+                                                onchange={handleThursdayStartSecondIntervalChange}>
+                            </lightning-combobox>
+                            <span class="sep">to</span>
+                            <lightning-combobox class="w8" variant="label-hidden" placeholder="End"
+                                                value={thursdayEndSecondInterval} options={hourOptions}
+                                                onchange={handleThursdayEndSecondIntervalChange}>
+                            </lightning-combobox>
+                        </div>
+                    </div>
+
+                    <!-- Minus Button -->
+                    <div class="slds-col slds-grow-none slds-m-left_x-small">
+                        <lightning-button-icon
+                            icon-name="utility:dash"
+                            alternative-text="Remove Thursday time range"
+                            title="Remove Thursday time range"
+                            variant="border"
+                            size="small"
+                            class="slds-button_icon-border-circle slds-m-left_small"
+                            onclick={removeThursdayExtraCombobox}>
+                        </lightning-button-icon>
+                    </div>
+                </div>
+            </template>
 
             <!-- Friday Comboboxes -->
             <div class="slds-grid slds-grid_vertical-align-center slds-p-around_small">
                 <div class="slds-col slds-size_1-of-5 slds-text-title_bold">Friday</div>
             </div>
-            <div class="slds-col slds-size_4-of-5">
-                <div class="time-chip">
-                  <lightning-combobox class="w8" variant="label-hidden" placeholder="Start"
-                                      value={fridayStart} options={hourOptions}
-                                      onchange={handleFridayStartChange}>
-                  </lightning-combobox>
-                  <span class="sep">to</span>
-                  <lightning-combobox class="w8" variant="label-hidden" placeholder="End"
-                                      value={thursdayEnd} options={hourOptions}
-                                      onchange={handleFridayEndChange}>
-                  </lightning-combobox>
+            <!-- Row: Chip and Plus Button -->
+            <div class="slds-grid slds-grid_vertical-align-center slds-gutters_none slds-p-around_small">
+                <!-- Time Chip -->
+                <div class="slds-col slds-grow-none">
+                    <div class="time-chip">
+                        <lightning-combobox class="w8" variant="label-hidden" placeholder="Start"
+                                            value={fridayStartFirstInterval} options={hourOptions}
+                                            onchange={handleFridayStartFirstIntervalChange}>
+                        </lightning-combobox>
+                        <span class="sep">to</span>
+                        <lightning-combobox class="w8" variant="label-hidden" placeholder="End"
+                                            value={firstStartSecondInterval0} options={hourOptions}
+                                            onchange={handleFridayEndFirstIntervalChange}>
+                        </lightning-combobox>
+                    </div>
                 </div>
+
+                <!-- Plus Button -->
+                <template if:false={fridayExtraCombobox}>
+                    <div class="slds-col slds-grow-none slds-m-left_x-small">
+                        <lightning-button-icon
+                            icon-name="utility:add"
+                            alternative-text="Add Friday time range"
+                            title="Add Friday time range"
+                            variant="border"
+                            size="small"
+                            class="slds-button_icon-border-circle slds-m-left_small"
+                            onclick={addFridayExtraCombobox}>
+                        </lightning-button-icon>
+                    </div>
+                </template>
             </div>
 
-            <div slot="footer" class="slds-p-around_small slds-text-align_right"></div>
+            <!-- If extra Combobox needed for Friday -->
+            <template if:true={fridayExtraCombobox}>
+                <!-- Row: Chip and Minus = Button -->
+                <div class="slds-grid slds-grid_vertical-align-center slds-gutters_none slds-p-around_small">
+                    <!-- Time Chip -->
+                    <div class="slds-col slds-grow-none">
+                        <div class="time-chip">
+                            <lightning-combobox class="w8" variant="label-hidden" placeholder="Start"
+                                                value={fridayStartSecondInterval} options={hourOptions}
+                                                onchange={handleFridayStartSecondIntervalChange}>
+                            </lightning-combobox>
+                            <span class="sep">to</span>
+                            <lightning-combobox class="w8" variant="label-hidden" placeholder="End"
+                                                value={fridayEndSecondInterval} options={hourOptions}
+                                                onchange={handleFridayEndSecondIntervalChange}>
+                            </lightning-combobox>
+                        </div>
+                    </div>
+
+                    <!-- Minus Button -->
+                    <div class="slds-col slds-grow-none slds-m-left_x-small">
+                        <lightning-button-icon
+                            icon-name="utility:dash"
+                            alternative-text="Remove Friday time range"
+                            title="Remove Friday time range"
+                            variant="border"
+                            size="small"
+                            class="slds-button_icon-border-circle slds-m-left_small"
+                            onclick={removeFridayExtraCombobox}>
+                        </lightning-button-icon>
+                    </div>
+                </div>
+            </template>
+
+            <div slot="footer" class="slds-p-around_small slds-text-align_right">
+                <lightning-button label="Cancel" onclick={exitLWC}></lightning-button>
+                <lightning-button variant="brand" label="Save" onclick={saveSchedule}></lightning-button>
+            </div>
         </lightning-card>
     </template>
 </template>
