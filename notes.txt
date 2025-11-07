@@ -36,4 +36,6 @@ IMPLEMENTATION
 //   - here we explain to the user the LWC's functionality and allow him to start the process
 
 // 2nd Screen --> Actual Scheduler
-
+//   - we have an instruction set, which explains the user how to use the tool
+//   - for each working day of the week we have 2 comboboxes with the options from the "Hours in the Day" Global Value Set
+//   
