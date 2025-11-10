@@ -6,6 +6,22 @@ import { getObjectInfo } from 'lightning/uiObjectInfoApi';
 import WORKING_DAYS_OBJECT from '@salesforce/schema/Working_Day__c';
 import HOURS_PICKLIST_FIELD from '@salesforce/schema/Working_Day__c.Start_Hour__c';
 import { getPicklistValues } from 'lightning/uiObjectInfoApi';
+import storeSchedule from '@salesforce/apex/WorkingHoursController.storeSchedule';
+
+// make the LWC throw error if i'm trying to save second interval without first interval
+
+const intervalKeys = [
+    'mondayStartFirstInterval','mondayEndFirstInterval',
+    'mondayStartSecondInterval','mondayEndSecondInterval',
+    'tuesdayStartFirstInterval','tuesdayEndFirstInterval',
+    'tuesdayStartSecondInterval','tuesdayEndSecondInterval',
+    'wednesdayStartFirstInterval','wednesdayEndFirstInterval',
+    'wednesdayStartSecondInterval','wednesdayEndSecondInterval',
+    'thursdayStartFirstInterval','thursdayEndFirstInterval',
+    'thursdayStartSecondInterval','thursdayEndSecondInterval',
+    'fridayStartFirstInterval','fridayEndFirstInterval',
+    'fridayStartSecondInterval','fridayEndSecondInterval'
+];
 
 export default class WorkingHours extends LightningElement {
     showWelcomeScreenBool = true;
@@ -46,8 +62,9 @@ export default class WorkingHours extends LightningElement {
     thursdayExtraCombobox = false;
     fridayExtraCombobox = false;
 
-
     hoursPicklistOptions = [];
+
+    isSaving = false;
 
     // show welcome screen until button presses, then switch to scheduler
     showScheduler() {
@@ -177,28 +194,65 @@ export default class WorkingHours extends LightningElement {
         this.fridayEndSecondInterval = event.detail.value;
     }
 
-    saveSchedule(){}
+    async saveSchedule(){
+        if (this.isSaving){
+            return;
+        }
+
+        // Build the pairs explicitly and inspect them
+        const pairs = intervalKeys.map(k => [k, this[k]]);
+        console.log('pairs length:', pairs.length);
+        console.log('pairs sample:', pairs.slice(0, 5)); // show first 5 [key,value] items
+
+        // Build the Map and check its size
+        const intervalsMap = new Map(pairs);
+        console.log('map size:', intervalsMap.size);
+
+        const payload = Object.fromEntries(pairs); // not from the Map, avoids proxy weirdness
+
+        // JSON string if you plan to send to Apex
+        console.log('payload JSON:', JSON.stringify(payload));
+
+        try {
+            this.isSaving = true; 
+            await storeSchedule({ workingIntervals: payload });
+            this.dispatchEvent(
+                new ShowToastEvent({
+                  title: 'Saved',
+                  message: 'Working schedule saved.',
+                  variant: 'success'
+                })
+              );
+            this.exitLWC(); 
+          } catch (e) {
+            this.dispatchEvent(
+                new ShowToastEvent({
+                  title: 'Error saving schedule',
+                  message: e?.body?.message || 'Save failed.',
+                  variant: 'error'
+                })
+            );
+          } finally {
+            this.isSaving = false;     // unlock
+        }
+    }
 
     exitLWC(){
+        // go back to welcome screen
         this.showSchedulerBool = false;
         this.showWelcomeScreenBool = true;
 
-        this.mondayStart = null;
-        this.mondayEnd = null;
-        this.tuesdayStart = null;
-        this.tuesdayEnd = null;
-        this.wednesdayStart = null;
-        this.wednesdayEnd = null;
-        this.thursdayStart = null;
-        this.thursdayEnd = null;
-        this.fridayStart = null;
-        this.fridayEnd = null;
+        // reset all set time intervals
+        intervalKeys.forEach(k => { this[k] = null; });
+
+        // reset all extra comboboxes
+        this.mondayExtraCombobox = false;
+        this.tuesdayExtraCombobox = false;
+        this.wednesdayExtraCombobox = false;
+        this.thursdayExtraCombobox = false;
+        this.fridayExtraCombobox = false;
     }
-
-    addExtraCombobox(){
-
-    }
-
+     
     addMondayExtraCombobox(){
         this.mondayExtraCombobox = true;
     }
