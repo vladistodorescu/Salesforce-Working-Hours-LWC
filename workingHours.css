@@ -22,7 +22,7 @@
 .day-chip {
     inline-size: 1.5rem;        /* was 2.5rem */
     block-size: 1.5rem;         /* was 2.5rem */
-    line-height: 1.5rem;        /* keep text vertically centered */
+    line-height: 1.5rem;        /* keep text vertically centered */ 
     border-radius: .25rem;      /* square-ish; use 0 for sharp corners */
     border: 0;
     cursor: pointer;
@@ -32,19 +32,19 @@
     background: var(--slds-g-color-neutral-base-95, #eef1f6);
     color: var(--slds-g-color-neutral-base-50, #7e8b99);
     transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease, color 120ms ease;
-}
+  }
   
-.day-chip:hover { transform: translateY(-1px); }
+  .day-chip:hover { transform: translateY(-1px); }
   
-/* selected = Salesforce blue */
-.day-chip_on {
+  /* selected = Salesforce blue */
+  .day-chip_on {
     background: var(--slds-g-color-brand-base-60, #1b66e5);
     color: #fff;
     box-shadow: 0 0 0 2px rgba(27,102,229,0.15);
-}
+  }
   
-/* focus ring for keyboard users (optional) */
-.day-chip:focus {
+  /* focus ring for keyboard users (optional) */
+  .day-chip:focus {
     outline: none;
     box-shadow: 0 0 0 2px var(--slds-g-color-brand-base-50, #1a5fd0);
-}
+  }
