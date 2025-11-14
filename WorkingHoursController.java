@@ -160,24 +160,24 @@ public with sharing class WorkingHoursController {
             }
         }
 
-        // assign the timezone of current running user
-        String timezoneID = UserInfo.getTimeZone().getID();
-        for (Schema.PicklistEntry pe : Working_Schedule__c.Timezone__c.getDescribe().getPicklistValues()){
-            if (pe.getValue() == timezoneID){
-                workingSchedule.Timezone__c = pe.getValue();
-                break;
-            } 
-        }
-
-        // assign running user to the schedule
-        workingSchedule.User_Lookup__c = UserInfo.getUserId();
-
         // only insert the Working_Schedule__c record, if we have at least one valid first interval
         if (isValidInterval(monday.Start_Hour__c, monday.End_Hour__c) || 
             isValidInterval(tuesday.Start_Hour__c, tuesday.End_Hour__c) || 
             isValidInterval(wednesday.Start_Hour__c, wednesday.End_Hour__c) || 
             isValidInterval(thursday.Start_Hour__c, thursday.End_Hour__c) ||
             isValidInterval(friday.Start_Hour__c, friday.End_Hour__c)){
+                // assign the timezone of current running user
+                String timezoneID = UserInfo.getTimeZone().getID();
+                for (Schema.PicklistEntry pe : Working_Schedule__c.Timezone__c.getDescribe().getPicklistValues()){
+                    if (pe.getValue() == timezoneID){
+                        workingSchedule.Timezone__c = pe.getValue();
+                        break;
+                    } 
+                }
+
+                // assign running user to the schedule
+                workingSchedule.User_Lookup__c = UserInfo.getUserId();
+
                 insert workingSchedule;
         }
         else{
