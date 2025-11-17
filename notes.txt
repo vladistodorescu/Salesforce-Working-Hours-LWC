@@ -37,5 +37,18 @@ IMPLEMENTATION
 
 // 2nd Screen --> Actual Scheduler
 //   - we have an instruction set, which explains the user how to use the tool
-//   - for each working day of the week we have 2 comboboxes with the options from the "Hours in the Day" Global Value Set
-//   
+//   - at the beginning, we are allowed to select for which working days we want to create the schedule (by selecting it, the html component appears, when deselected html component disappears and 
+//     selected values are set to null, extra intervals removed)
+//   - for each working day of the week we have 2 comboboxes with the options from the "Hours in the Day" Global Value Set (when pressing the "+" button the 2nd interval appears, when pressing     //     the "-" button it disappears, and values for it are set to null) 
+//
+// If "Cancel" button is pressed, the component is reset and no data is stored in the database.
+// Now that we are able to take in data, we must validate and store it, following pattern is followed after pressing "Save" button:
+//   - create a Working_Day__c record for each of the five working days, and a Working_Schedule__c record which will be parent for them
+//   - iterate thorugh the workingIntervals map and assign the values (if exist) to the fields of the newly created records
+//   - check if there is at least one valid first interval for one of the working days, so that the working schedule is not pointlessly inserted (if YES --> extract timezone from current running //     user and match it with the correct picklist value, from "Timezones" Global Value Set, assign to working schedule and insert it / if NO --> throw AuraHandledException)
+//   - check if we have a valid first interval for the day (if not --> move onto the next day, and don't add to insert list)
+//   - if we have a valid first interval for the day, check if we have values for the 2nd interval (if not --> add the Working_Day__c record to the insert list, with the one valid interval,               inserted Working_Schedule__c record ID as the parent for the master-detail relationship, and rest of the fields completed)
+//   - if we do have values for the 2nd interval, check if it is a valid interval (if not --> throw AuraHandledException)
+//   - if we have 2 valid intervals, check if they are senseful and don't overlap (if not --> throw AuraHandledException)
+//   - if they are senseful anf don't overlap aswell, add the Working_Day__c record to the insert list, with the 2 valid intervals, inserted Working_Schedule__c record ID as the parent for the            master-detail relationship, and rest of the fields completed)
+//   - after doing this for all working days, we check if the Working_Days__c record list is not empty, and if so we insert the records
